@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (pm.firstperson) // if the player is in first person
         {
-            transform.localPosition = Vector3.up; // put the camera inside the player
+            transform.localPosition = Vector3.up * 2; // put the camera inside the player
             if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) // if mouse moved
             {
                 // rotate by the y movement along the x axis and by the x movement along the y axis
