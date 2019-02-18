@@ -37,55 +37,31 @@ public class PlayerMovement : MonoBehaviour
     // update loop
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)) // check if space is pressed
+        Vector3 rotation = transform.eulerAngles;
+        if (Input.GetKey(KeyCode.W)) // forward
         {
-            firstperson = !firstperson; // swap 1st/3rd person
+            movedir = cam.transform.forward;
+            movedir.y = 0;
+            //rotation.y = 0;
         }
-
-        // reset move direction
-        movedir = Vector3.zero;
-
-        if (firstperson) // first person movement
+        else if (Input.GetKey(KeyCode.S)) // back
         {
-            // get forward vector of camera
-            Vector3 cameradir = cam.transform.forward;
-            cameradir.y = 0;
-
-            if (Input.GetKey(KeyCode.W)) // move along camera forward
-            {
-                movedir = cameradir;
-            }
-            else if (Input.GetKey(KeyCode.S)) // move back along camera forward
-            {
-                movedir = cameradir * -1;
-            }
-            if (Input.GetKey(KeyCode.D)) // move right of the camera
-            {
-                movedir = Quaternion.AngleAxis(90, Vector3.up) * cameradir;
-            }
-            else if (Input.GetKey(KeyCode.A)) // move left of the camera
-            {
-                movedir = Quaternion.AngleAxis(-90, Vector3.up) * cameradir;
-            }
+            movedir = cam.transform.forward * -1;
+            movedir.y = 0;
+            //rotation.y = 180;
         }
-        else // 3rd person movement
+        if (Input.GetKey(KeyCode.D)) // right
         {
-            if (Input.GetKey(KeyCode.W)) // forward
-            {
-                movedir.z = 1;
-            }
-            else if (Input.GetKey(KeyCode.S)) // back
-            {
-                movedir.z = -1;
-            }
-            if (Input.GetKey(KeyCode.D)) // right
-            {
-                movedir.x = 1;
-            }
-            else if (Input.GetKey(KeyCode.A)) // left
-            {
-                movedir.x = -1;
-            }
+            movedir = cam.transform.right;
+            movedir.y = 0;
+            //rotation.y = 90;
+
+        }
+        else if (Input.GetKey(KeyCode.A)) // left
+        {
+            movedir = cam.transform.right *-1;
+            movedir.y = 0;
+            //rotation.y = 270;
         }
 
         // normalize vector and multiply by movespeed
@@ -95,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         movedir.y = movedir.y - (gravity * Time.deltaTime);
         // move
         controller.Move(movedir);
+        transform.localEulerAngles = rotation;
 
     }
 }

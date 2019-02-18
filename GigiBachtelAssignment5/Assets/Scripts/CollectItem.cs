@@ -23,6 +23,11 @@ public class CollectItem : MonoBehaviour
     {
         if(other.tag == "Collectible") // if the object collided with is a collectible
         {
+            Debug.Log(other.gameObject.GetComponent<ParticleSystem>());
+            if(other.gameObject.GetComponent<ParticleSystem>() != null)
+            {
+                other.gameObject.GetComponent<ParticleSystem>().Play();
+            }
             increaseCount(); // increase the collected item count
             Destroy(other.gameObject); // destroy collectible
         }
