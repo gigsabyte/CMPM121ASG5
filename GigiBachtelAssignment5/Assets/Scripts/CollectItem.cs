@@ -21,6 +21,16 @@ public class CollectItem : MonoBehaviour
     // on collision with trigger collider
     private void OnTriggerEnter(Collider other)
     {
+        if(other.tag == "DoorKey")
+        {
+            other.gameObject.GetComponent<OpenDoor>().Door.GetComponent<RotateDoor>().rotate = true;
+            if (other.gameObject.GetComponent<ParticleSystem>() != null)
+            {
+                other.gameObject.GetComponent<ParticleSystem>().Play();
+            }
+            increaseCount(); // increase the collected item count
+            other.gameObject.GetComponent<DestroyCollectible>().alive = false;
+        }
         if(other.tag == "Collectible") // if the object collided with is a collectible
         {
             Debug.Log(other.gameObject.GetComponent<ParticleSystem>());
@@ -29,7 +39,7 @@ public class CollectItem : MonoBehaviour
                 other.gameObject.GetComponent<ParticleSystem>().Play();
             }
             increaseCount(); // increase the collected item count
-            Destroy(other.gameObject); // destroy collectible
+            other.gameObject.GetComponent<DestroyCollectible>().alive = false;
         }
     }
 
