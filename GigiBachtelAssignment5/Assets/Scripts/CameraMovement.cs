@@ -28,12 +28,12 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        zpos += Input.GetAxis("Mouse X");
-        xpos -= Input.GetAxis("Mouse X");
-        Vector3 newpos = Vector3.Normalize(new Vector3(xpos, 0, zpos));
-        newpos *= 8;
-        newpos.y = 4;
-        transform.position = player.transform.position + newpos; // put the camera above and behind the player
+        //zpos += Input.GetAxis("Mouse X");
+        //xpos -= Input.GetAxis("Mouse X");
+        //Vector3 newpos = Vector3.Normalize(new Vector3(xpos, 0, zpos));
+        //newpos *= 8;
+        //newpos.y = 4;
+        transform.position = player.transform.position;// + newpos; // put the camera above and behind the player
         //transform.LookAt(player.transform); // look at the player
         if (pm.firstperson) // if the player is in first person
         {

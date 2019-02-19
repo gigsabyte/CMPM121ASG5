@@ -27,42 +27,57 @@ public class PlayerMovement : MonoBehaviour
    
     // character controller
     private CharacterController controller;
+
+    // character animator
+    private Animator animator;
     
-    // get character controller
+    // get character controller and animator
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     // update loop
     void Update()
     {
+        bool isWalking = false;
         Vector3 rotation = transform.eulerAngles;
         if (Input.GetKey(KeyCode.W)) // forward
         {
-            movedir = cam.transform.forward;
+            movedir = Vector3.forward;
             movedir.y = 0;
-            //rotation.y = 0;
+            //transform.forward = cam.transform.forward;
+            rotation.y = cam.transform.parent.localEulerAngles.y;
+            isWalking = true;
         }
         else if (Input.GetKey(KeyCode.S)) // back
         {
-            movedir = cam.transform.forward * -1;
+            movedir = Vector3.forward;
             movedir.y = 0;
+            isWalking = true;
+            rotation.y = cam.transform.parent.localEulerAngles.y + 180;
             //rotation.y = 180;
         }
         if (Input.GetKey(KeyCode.D)) // right
         {
-            movedir = cam.transform.right;
+            movedir = Vector3.forward;
             movedir.y = 0;
+            isWalking = true;
+            rotation.y = cam.transform.parent.localEulerAngles.y + 90;
             //rotation.y = 90;
 
         }
         else if (Input.GetKey(KeyCode.A)) // left
         {
-            movedir = cam.transform.right *-1;
+            movedir = Vector3.forward;
             movedir.y = 0;
+            isWalking = true;
+            rotation.y = cam.transform.parent.localEulerAngles.y - 90;
             //rotation.y = 270;
         }
+
+        animator.SetBool("IsWalking", isWalking);
 
         // normalize vector and multiply by movespeed
         movedir = Vector3.Normalize(movedir) * movespeed * Time.deltaTime;
