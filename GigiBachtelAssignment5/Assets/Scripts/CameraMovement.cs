@@ -14,15 +14,11 @@ public class CameraMovement : MonoBehaviour
     //reference to playermovement script
     private PlayerMovement pm;
 
-    float xpos = 0;
-    float zpos = 0;
-
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; // lock cursor
         pm = player.GetComponent<PlayerMovement>(); // get reference
-        zpos = -8;
     }
 
     // Update is called once per frame

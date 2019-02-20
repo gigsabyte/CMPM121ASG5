@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // update loop
-    void Update()
+    void FixedUpdate()
     {
         bool isWalking = false;
         Vector3 rotation = transform.eulerAngles;

@@ -16,7 +16,7 @@ public class DestroyCollectible : MonoBehaviour
     {
         if(!alive)
         {
-            Destroy(gameObject, Time.deltaTime*60); // destroy collectible
+            Destroy(gameObject); // destroy collectible
         }
     }
 }
