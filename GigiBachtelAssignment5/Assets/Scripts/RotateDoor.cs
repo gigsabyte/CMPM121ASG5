@@ -11,7 +11,8 @@ public class RotateDoor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rtime = 0;
+        rotate = false;
     }
 
     // Update is called once per frame
@@ -19,10 +20,13 @@ public class RotateDoor : MonoBehaviour
     {
         if (rotate)
         {
-            Debug.Log(rtime);
+            
             if (rtime < 1)
             {
-                transform.Rotate(Vector3.right, Time.deltaTime * 45);
+                Vector3 rotation = transform.eulerAngles;
+                rotation.y += Time.deltaTime * 45;
+                //transform.Rotate(Vector3.up, Time.deltaTime * 45);
+                transform.eulerAngles = rotation;
                 rtime += Time.deltaTime;
             }
             else
